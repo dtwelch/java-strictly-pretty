@@ -1,7 +1,7 @@
 package com.dt.immutableadts;
 
+import com.dt.TailCall;
 import org.jetbrains.annotations.NotNull;
-import org.rsrg.resolve.utils.TailCall;
 
 import java.util.Iterator;
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.*;
 
-import static org.rsrg.resolve.utils.TailCall.ret;
-import static org.rsrg.resolve.utils.TailCall.sus;
+import static com.dt.TailCall.ret;
+import static com.dt.TailCall.sus;
 
 /**
  * An immutable list class that uses pattern matching. A lot of this code has

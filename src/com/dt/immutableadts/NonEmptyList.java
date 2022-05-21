@@ -1,10 +1,10 @@
 package com.dt.immutableadts;
 
-import org.rsrg.resolve.utils.TailCall;
+import com.dt.TailCall;
 
-import static org.rsrg.resolve.utils.TailCall.ret;
-import static org.rsrg.resolve.utils.TailCall.sus;
-import static org.rsrg.resolve.utils.immutableadts.list.EmptyList.emp;
+import static com.dt.TailCall.ret;
+import static com.dt.TailCall.sus;
+import static com.dt.immutableadts.EmptyList.emp;
 
 public final class NonEmptyList<T> implements IList<T> {
 

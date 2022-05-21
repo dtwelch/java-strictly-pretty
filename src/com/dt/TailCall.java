@@ -2,6 +2,16 @@ package com.dt;
 
 import java.util.function.Supplier;
 
+/**
+ * A class to simulate tail call elimination (TCE) for recursive methods to
+ * limit stack-related memory issues on large inputs.
+ *
+ * <b>Note:</b>  this can only be used if the method's recursive call is the very
+ * last statement in the method. If not, the method must be re-written in a
+ * tail recursive way before this class can be used.
+ *
+ * @param <T>
+ */
 public abstract class TailCall<T> {
 
     public abstract TailCall<T> resume();

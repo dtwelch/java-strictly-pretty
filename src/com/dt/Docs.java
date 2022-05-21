@@ -2,13 +2,11 @@ package com.dt;
 
 public interface Docs {
 
-    String BRK = ":/:";
-    String JN = ":::";
+    String BRK = ":/:",  JN = ":::";
 
     sealed interface Doc {
 
         int DEFAULT_WIDTH = 80;
-
         /* in DocFactory
         def :::(doc: Document): Document = DocCons(doc, this)
         def :::(doc: String): Document = DocCons(DocText(doc), this)
@@ -31,23 +29,18 @@ public interface Docs {
             p.format(this);
             return writer.toString();
         }
-
     }
 
     final class DocNil implements Doc {
         public static final DocNil INSTANCE = new DocNil();
 
-        private DocNil() {
-        }
+        private DocNil() { }
 
-        @Override public String toString() {
-            return "DocNil";
-        }
+        @Override public String toString() { return "DocNil"; }
     }
 
     final class DocBreak implements Doc {
         public static final Doc INSTANCE = new DocBreak();
-
         private DocBreak() { }
 
         @Override public String toString() { return "DocBreak"; }
@@ -60,15 +53,11 @@ public interface Docs {
     }
 
     record DocGroup(Doc doc) implements Doc {
-        @Override public String toString() {
-            return "DocGroup(" + doc + ")";
-        }
+        @Override public String toString() { return "DocGroup(" + doc + ")"; }
     }
 
     record DocText(String text) implements Doc {
-        @Override public String toString() {
-            return "DocText(" + text + ")";
-        }
+        @Override public String toString() { return "DocText(" + text + ")";  }
     }
 
     record DocCons(Doc hd, Doc tl) implements Doc {
