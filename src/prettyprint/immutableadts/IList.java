@@ -1,6 +1,6 @@
-package com.dt.immutableadts;
+package prettyprint.immutableadts;
 
-import com.dt.TailCall;
+import prettyprint.TailCall;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.*;
-
-import static com.dt.TailCall.ret;
-import static com.dt.TailCall.sus;
 
 /**
  * An immutable list class that uses pattern matching. A lot of this code has
@@ -67,9 +64,9 @@ public sealed interface IList<T> extends Iterable<T>
 
     static <A> TailCall<IList<A>> drop_(@NotNull IList<A> l, int n) {
         return switch (l) {
-            case EmptyList<A> x -> ret(l);
-            case NonEmptyList<A> x -> sus(() ->
-                    n <= 0 ? ret(l) : drop_(l.tail(), n - 1));
+            case EmptyList<A> x -> TailCall.ret(l);
+            case NonEmptyList<A> x -> TailCall.sus(() ->
+                    n <= 0 ? TailCall.ret(l) : drop_(l.tail(), n - 1));
         };
     }
 
@@ -82,8 +79,8 @@ public sealed interface IList<T> extends Iterable<T>
                                                      IList<A> list) {
         return switch (list) {
             case NonEmptyList<A> x &&
-                    p.test(x.head()) -> sus(() -> dropWhile_(p, x.tail()));
-            default -> ret(list);
+                    p.test(x.head()) -> TailCall.sus(() -> dropWhile_(p, x.tail()));
+            default -> TailCall.ret(list);
         };
     }
 
@@ -94,8 +91,8 @@ public sealed interface IList<T> extends Iterable<T>
     private static <A> TailCall<IList<A>> reverse_(IList<A> acc,
                                                    IList<A> list) {
         return switch (list) {
-            case EmptyList<A> x -> ret(acc);
-            case NonEmptyList<A> x -> sus(() -> reverse_(
+            case EmptyList<A> x -> TailCall.ret(acc);
+            case NonEmptyList<A> x -> TailCall.sus(() -> reverse_(
                     new NonEmptyList<>(list.head(), acc), x.tail()));
         };
     }
@@ -116,8 +113,8 @@ public sealed interface IList<T> extends Iterable<T>
     private static <T, U> TailCall<U> foldLeft_(IList<T> ts, U acc,
                                                 Function<U, Function<T, U>> f) {
         return switch (ts) {
-            case EmptyList<T> x -> ret(acc);
-            case NonEmptyList<T> x -> sus(() -> foldLeft_(ts.tail(),
+            case EmptyList<T> x -> TailCall.ret(acc);
+            case NonEmptyList<T> x -> TailCall.sus(() -> foldLeft_(ts.tail(),
                     f.apply(acc).apply(ts.head()), f));
         };
     }
@@ -137,8 +134,8 @@ public sealed interface IList<T> extends Iterable<T>
     private static <T, U> TailCall<U> foldRight_(U acc, IList<T> ts,
                                                  Function<T, Function<U, U>> f) {
         return switch (ts) {
-            case EmptyList<T> x -> ret(acc);
-            case NonEmptyList<T> x -> sus(
+            case EmptyList<T> x -> TailCall.ret(acc);
+            case NonEmptyList<T> x -> TailCall.sus(
                     () -> foldRight_(f.apply(x.head()).apply(acc),
                             x.tail(), f));
         };

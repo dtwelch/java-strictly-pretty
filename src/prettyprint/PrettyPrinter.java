@@ -1,9 +1,8 @@
-package com.dt;
+package prettyprint;
 
-import com.dt.Docs.Doc;
-import com.dt.immutableadts.EmptyList;
-import com.dt.immutableadts.IList;
-import com.dt.immutableadts.NonEmptyList;
+import prettyprint.immutableadts.EmptyList;
+import prettyprint.immutableadts.IList;
+import prettyprint.immutableadts.NonEmptyList;
 
 public final class PrettyPrinter {
 
@@ -17,7 +16,7 @@ public final class PrettyPrinter {
         this.width = width;
     }
 
-    public void format(Doc hd) {
+    public void format(Docs.Doc hd) {
         fmt_(0, IList.<FmtState>of().cons(
                 new FmtState(0, false, new Docs.DocGroup(hd))));
     }

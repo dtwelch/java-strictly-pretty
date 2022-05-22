@@ -1,4 +1,4 @@
-package com.dt;
+package prettyprint;
 
 public interface Docs {
 

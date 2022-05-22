@@ -1,10 +1,6 @@
-package com.dt.immutableadts;
+package prettyprint.immutableadts;
 
-import com.dt.TailCall;
-
-import static com.dt.TailCall.ret;
-import static com.dt.TailCall.sus;
-import static com.dt.immutableadts.EmptyList.emp;
+import prettyprint.TailCall;
 
 public final class NonEmptyList<T> implements IList<T> {
 
@@ -35,10 +31,10 @@ public final class NonEmptyList<T> implements IList<T> {
     static <T> TailCall<StringBuilder> toString_(StringBuilder acc,
                                                  IList<T> lst) {
         return switch (lst) {
-            case EmptyList<T> x -> ret(acc);
-            case NonEmptyList<T> x -> sus(() ->
+            case EmptyList<T> x -> TailCall.ret(acc);
+            case NonEmptyList<T> x -> TailCall.sus(() ->
                     toString_(acc.append(x.head())
-                                    .append(x.tail() != emp() ? ", " : ""),
+                                    .append(x.tail() != EmptyList.emp() ? ", " : ""),
                             x.tail()));
         };
     }

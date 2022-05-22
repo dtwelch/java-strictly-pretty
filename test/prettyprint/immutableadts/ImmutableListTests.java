@@ -1,4 +1,4 @@
-package com.dt.immutableadts;
+package prettyprint.immutableadts;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import static com.dt.immutableadts.EmptyList.emp;
-import static com.dt.immutableadts.IList.of;
+import static prettyprint.immutableadts.EmptyList.emp;
+import static prettyprint.immutableadts.IList.of;
 
 public final class ImmutableListTests {
 

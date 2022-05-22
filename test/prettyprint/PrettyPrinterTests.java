@@ -1,14 +1,14 @@
-package com.dt;
+package prettyprint;
 
-import com.dt.Docs.Doc;
-import com.dt.Docs.DocCons;
-import com.dt.Docs.DocText;
+import prettyprint.Docs.Doc;
+import prettyprint.Docs.DocCons;
+import prettyprint.Docs.DocText;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.dt.DocFactory.*;
-import static com.dt.Docs.BRK;
+import static prettyprint.DocFactory.*;
+import static prettyprint.Docs.BRK;
 
 public final class PrettyPrinterTests {
 

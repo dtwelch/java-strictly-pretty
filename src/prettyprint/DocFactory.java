@@ -1,9 +1,9 @@
-package com.dt;
+package prettyprint;
 
-import com.dt.Docs.Doc;
-import com.dt.Docs.DocCons;
-import com.dt.Docs.DocNil;
-import com.dt.Docs.DocText;
+import prettyprint.Docs.Doc;
+import prettyprint.Docs.DocCons;
+import prettyprint.Docs.DocNil;
+import prettyprint.Docs.DocText;
 
 import java.util.*;
 import java.util.stream.Stream;

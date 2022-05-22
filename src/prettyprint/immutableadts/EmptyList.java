@@ -1,4 +1,4 @@
-package com.dt.immutableadts;
+package prettyprint.immutableadts;
 
 public final class EmptyList<T> implements IList<T> {
 
