@@ -6,4 +6,4 @@ A Java implementation of Scala's (now deprecated) text prettyprinting package us
 Note: the algorithm currently relies on a hand rolled java immutable list class. It might be worth porting this version to one that uses standard (non-immutable) java.util.lists for a lighter weight implementation with less custom code to maintain and test.
 
 ## Tests
-The repo includes some unit tests for the pretty printer and the immutable list. The pretty printer tests incorporate/are-takes-on some from existing implementation tests of this algorithm in scala, namely: [this one](https://github.com/erdeszt/scala-strictly-pretty) and [this one](https://github.com/weso/document).
+The repo includes some unit tests for the pretty printer and the immutable list. The pretty printer tests incorporate/are-takes-on tests from existing scala implementations of this algorithm, namely: [this one](https://github.com/erdeszt/scala-strictly-pretty) and [this one](https://github.com/weso/document).
