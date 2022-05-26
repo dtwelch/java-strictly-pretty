@@ -1,4 +1,4 @@
-# Many Sorted Logic for Math Entity Theory (MET)
+# Strictly Pretty
 ## A Java Implementation of Wadler and Lindig's pretty printer
 
 A Java implementation of Scala's (now deprecated) text prettyprinting package using pattern matching. I'll update the repo as newer versions of java go on to improve pattern matching capabilities via deconstruction patterns, etc. [Here](https://www.scala-lang.org/api/2.12.8/scala/text/index.html) is a link to the docs for the original scala version.
