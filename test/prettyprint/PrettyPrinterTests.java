@@ -1,8 +1,6 @@
 package prettyprint;
 
 import prettyprint.Docs.Doc;
-import prettyprint.Docs.DocCons;
-import prettyprint.Docs.DocText;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,40 +91,7 @@ public final class PrettyPrinterTests {
                         docNst(1, docTxt("b"))).prettyPrint(1));
     }
 
-    // some sample err msgs
-
-    @Test public void testSampleSyntaxErrorHzList() {
-        Doc factoryDoc = DocFactory.mkHzListDoc(docTxt("[ERROR]"),
-                docTxt(" "), mkHzListDoc(docTxt("Initial_CC:3:0"),
-                        docTxt(":")), docTxt(" "), docTxt("mismatched input " +
-                        "'<EOF>' expecting {';', " + "'≜'}"));
-
-        Doc expectedDoc = new DocCons(new DocText("[ERROR]"),
-                new DocCons(new DocText(" "),
-                        new DocCons(new DocCons(new DocText("Initial_CC:3:0")
-                                , new DocText(":")), new DocCons(new DocText(
-                                " "), new DocText("mismatched" + " " +
-                                "input '<EOF>' " + "expecting {';', " +
-                                "'≜'}")))));
-        Assertions.assertEquals(expectedDoc, factoryDoc);
-        Assertions.assertEquals("[ERROR] Initial_CC:3:0: " + "mismatched " +
-                        "input '<EOF>' expecting {';', '≜'}",
-                factoryDoc.prettyPrint(40));
-    }
-
-    @Test public void shouldBreakUpErrorMsg() {
-        Doc factoryDoc = DocFactory.mkHzListDoc(docTxt("[ERROR]"), docBrk(),
-                mkHzListDoc(docTxt("Initial_CC:3:0"), docTxt(":")), docBrk(),
-                docTxt("mismatched input '<EOF>' expecting {';', '≜'}"));
-
-        Assertions.assertEquals("[ERROR]\n" + "Initial_CC:3:0:\n" +
-                        "mismatched input '<EOF>' expecting {';', '≜'}",
-                factoryDoc.prettyPrint(40),
-                "routine test for breaking up a " +
-                        "message on different " + "lines (width: 40 chars)");
-    }
-
-    // sample lang tests (from the lindig paper)
+    // sample if-then-else (ite) tests
 
     private Doc cond, expr1, expr2, doc;
 
@@ -135,7 +100,6 @@ public final class PrettyPrinterTests {
         expr1 = binOpDoc("a", "<<", "2");
         expr2 = binOpDoc("a", "==", "b");
         doc = iteDoc(cond, expr1, expr2);
-        int x = 0;
     }
 
     @Test public void testItePrintW33() {
@@ -146,52 +110,57 @@ public final class PrettyPrinterTests {
 
     @Test public void testItePrintW32() {
         Assertions.assertEquals(
-                "if a == b\n" +
-                        "then a << 2\n" +
-                        "else a == b",
+                """
+                        if a == b
+                        then a << 2
+                        else a == b""",
                 doc.prettyPrint(32));
     }
 
     @Test public void testItePrintW15() {
         Assertions.assertEquals(
-                "if a == b\n" +
-                        "then a << 2\n" +
-                        "else a == b",
+                """
+                        if a == b
+                        then a << 2
+                        else a == b""",
                 doc.prettyPrint(15));
     }
 
     @Test public void testItePrintW10() {
         Assertions.assertEquals(
-                "if a == b\n" +
-                        "then\n" +
-                        "  a << 2\n" +
-                        "else\n" +
-                        "  a == b",
+                """
+                        if a == b
+                        then
+                          a << 2
+                        else
+                          a == b""",
                 doc.prettyPrint(10));
     }
 
     @Test public void testItePrintW8() {
         Assertions.assertEquals(
-                "if\n" +
-                        "  a == b\n" +
-                        "then\n" +
-                        "  a << 2\n" +
-                        "else\n" +
-                        "  a == b",
+                """
+                        if
+                          a == b
+                        then
+                          a << 2
+                        else
+                          a == b""",
                 doc.prettyPrint(8));
     }
 
     @Test public void testItePrintW7() {
         Assertions.assertEquals(
-                "if\n" +
-                        "  a ==\n" +
-                        "    b\n" +
-                        "then\n" +
-                        "  a <<\n" +
-                        "    2\n" +
-                        "else\n" +
-                        "  a ==\n" +
-                        "    b",
+                """
+                        if
+                          a ==
+                            b
+                        then
+                          a <<
+                            2
+                        else
+                          a ==
+                            b""",
                 doc.prettyPrint(7));
     }
 
@@ -202,12 +171,13 @@ public final class PrettyPrinterTests {
         Doc ite1 = iteDoc(c, e1, e2);
 
         Assertions.assertEquals(
-                "if |S| < |T|\n" +
-                        "then\n" +
-                        "  if a == b\n" +
-                        "  then a << 2\n" +
-                        "  else a == b\n" +
-                        "else S o T",
+                """
+                        if |S| < |T|
+                        then
+                          if a == b
+                          then a << 2
+                          else a == b
+                        else S o T""",
                 ite1.prettyPrint(15));
     }
 
@@ -218,22 +188,25 @@ public final class PrettyPrinterTests {
         Doc ite1 = iteDoc(c, e1, e2);
 
         Assertions.assertEquals(
-                "if |S| < |T|\n" +
-                        "then if a == b then a << 2 else a == b\n" +
-                        "else S o T",
+                """
+                        if |S| < |T|
+                        then if a == b then a << 2 else a == b
+                        else S o T""",
                 ite1.prettyPrint(50));
 
         Assertions.assertEquals(
-                "if |S| < |T|\n" +
-                        "then if a == b then a << 2 else a == b\n" +
-                        "else S o T",
+                """
+                        if |S| < |T|
+                        then if a == b then a << 2 else a == b
+                        else S o T""",
                 ite1.prettyPrint(40));
 
         Assertions.assertEquals(
-                "if |S| < |T|\n" +
-                        "then\n" +
-                        "  if a == b then a << 2 else a == b\n" +
-                        "else S o T",
+                """
+                        if |S| < |T|
+                        then
+                          if a == b then a << 2 else a == b
+                        else S o T""",
                 ite1.prettyPrint(35));
     }
 
